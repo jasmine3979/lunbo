@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>banner图</title>
+	<style type="text/css">
+	*{margin:0;padding: 0;}
+	ul{list-style: none;}
+	
+		#container{width: 100%; height: 470px; background: #ccc; position: relative;cursor: pointer;}
+		#container #pics div{width: 100%; height: 470px; position: absolute;left: 0;top: 0; display: none;  }
+		#container #pics div.sel{display: block;}
+
+		#container #pics div:nth-child(1){ background: #90dee8 url(images/1.jpg) no-repeat top center;}
+		#container #pics div:nth-child(2){  background: #d7d5be url(images/2.jpg) no-repeat top center;}
+		#container #pics div:nth-child(3){  background: #f3e4eb url(images/3.jpg) no-repeat top center;}
+		#container #pics div:nth-child(4){  background: #05e1f7 url(images/4.jpg) no-repeat top center;}
+		#container #menu{position: absolute;bottom:15px;left: 50%; transform: translateX(-50%);}
+		#container #menu li{width: 15px;height: 15px; border-radius: 50%; background: #aaa; float: left; margin-right: 10px; }
+		#container #menu li.sel{background: red;}
+		#container .arrow{width:30px;height: 30px; background: rgba(0,0,0,0.2); position: absolute;top: 220px; display: none;}
+		#container .arrow_left{left:0;}
+		#container .arrow_right{right:0;}
+
+	</style>
+</head>
+<body>
+<div id="container">
+	<!-- pics -->
+	<div id="pics">
+		<div class="sel"></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+	<!-- pics end -->
+	<ul id="menu">
+		<li class="sel"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<div class="arrow arrow_left"><img src="images/arrow-left.png"></div>
+	<div class="arrow arrow_right"><img src="images/arrow-right.png"></div>
+</div>
+	
+</body>
+</html>
+<script type="text/javascript">
+	var container=document.getElementById("container");
+	var pics=document.getElementById("pics");
+	var menu=document.getElementById("menu");
+	var divs=pics.getElementsByTagName("div");
+	var lis=menu.getElementsByTagName("li");
+
+
+	var cur_index=0;//保存选中图片的下标索引
+
+	//切换为下一张图片
+	function moveRight(){
+		divs[cur_index].className="";
+		lis[cur_index].className="";
+		cur_index++;
+
+		if(cur_index==divs.length){
+			cur_index=0;
+		}
+		divs[cur_index].className="sel";
+		lis[cur_index].className="sel";
+
+		setTimeout(moveRight,3000);
+	}
+	moveRight();
+
+
+	//菜单点击事件
+	for(var i=0;i<lis.length;i++){
+		lis[i].index=i;
+		lis[i].onclick=function(){
+			lis[cur_index].className="";
+			this.className="sel";
+
+
+
+			divs[cur_index].className="";
+			divs[this.index].className="sel";
+
+			cur_index=this.index;
+
+		};
+	}
+
+
+	container
+
+
+
+</script>
